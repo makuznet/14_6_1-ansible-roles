@@ -1,0 +1,7 @@
+---
+- name: installing and configuring vsftpd
+  hosts: ya
+  gather_facts: false
+  become: true
+  roles:
+    - role: vsftpd

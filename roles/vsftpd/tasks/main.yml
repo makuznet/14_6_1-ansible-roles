@@ -1,0 +1,19 @@
+---
+- name: install vsftpd
+  apt:
+    update_cache: yes
+    name: vsftpd
+    state: present
+  tags:
+    - "install vsftpd"
+  notify:
+    - vsftpd stop
+
+- name: changing vsftpd.conf file
+  template:
+    src: "{{ item.src_file }}"
+    dest: "{{ item.dest_file }}"
+  loop:
+    - { src_file: "vsftpd.conf.j2", dest_file: "/etc/vsftpd.conf" }
+  notify:
+    - vsftpd start
